@@ -1,0 +1,54 @@
+<div style="height: 100vh; " class="d-flex justify-content-center align-items-center bg-dark">
+    <div class="d-flex justify-content-center align-items-center bg-dark">
+      <div class="bg-light rounded p-4">
+        <!-- Header Section -->
+        <h3 class="text-center fw-bold">EMPLOYEE DETAILS</h3>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span>
+            <button class="btn btn-primary"  routerLink="/add">Add Employee</button>
+          </span>
+          <div>
+            <button (click)="filterItems('active')" class="btn btn-primary">Show Active Items</button>
+            <button (click)="filterItems('inactive')" class="btn btn-secondary">Show Inactive Items</button>
+          </div>
+          
+        </div>
+  
+        <!-- Table Section -->
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>UserName</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Replace with *ngFor in Angular -->
+         @if(allemployee.length>0)
+         { @for (item of allemployee; track $index)  { 
+            <tr>
+              <td>{{item.id}}</td>
+              <td>{{item.username}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.age}}</td>
+              <td>
+                <button class="btn btn-success me-2"  [routerLink]="['/edit',item.id]">Edit</button>
+                <button class="btn btn-danger" (click)="delemp(item.id)">Delete</button>
+              </td>
+            </tr>}}
+            
+          @else { <tr>
+              <td colspan="5" class="text-center">
+                No employee details found.
+              </td>
+            </tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
