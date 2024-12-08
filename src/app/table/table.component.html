@@ -1,54 +1,64 @@
-<div style="height: 100vh; " class="d-flex justify-content-center align-items-center bg-dark">
-    <div class="d-flex justify-content-center align-items-center bg-dark">
-      <div class="bg-light rounded p-4">
-        <!-- Header Section -->
-        <h3 class="text-center fw-bold">EMPLOYEE DETAILS</h3>
+<div style="height: 100vh; padding: 20px;" class="d-flex flex-column bg-dark">
+  <div class="bg-light rounded p-4 shadow-lg" style="flex-grow: 1;">
+    <!-- Header Section -->
+    <h3 class="text-center fw-bold mb-4" style="font-family: Arial, sans-serif;">
+      EMPLOYEE DETAILS
+    </h3>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <span>
-            <button class="btn btn-primary"  routerLink="/add">Add Employee</button>
-          </span>
-          <div>
-            <button (click)="filterItems('active')" class="btn btn-primary">Show Active Items</button>
-            <button (click)="filterItems('inactive')" class="btn btn-secondary">Show Inactive Items</button>
-          </div>
-          
-        </div>
-  
-        <!-- Table Section -->
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>UserName</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Replace with *ngFor in Angular -->
-         @if(allemployee.length>0)
-         { @for (item of allemployee; track $index)  { 
-            <tr>
-              <td>{{item.id}}</td>
-              <td>{{item.username}}</td>
-              <td>{{item.email}}</td>
-              <td>{{item.status}}</td>
-              <td>{{item.age}}</td>
-              <td>
-                <button class="btn btn-success me-2"  [routerLink]="['/edit',item.id]">Edit</button>
-                <button class="btn btn-danger" (click)="delemp(item.id)">Delete</button>
-              </td>
-            </tr>}}
-            
-          @else { <tr>
-              <td colspan="5" class="text-center">
-                No employee details found.
-              </td>
-            </tr>}
-          </tbody>
-        </table>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <button class="btn btn-success" routerLink="/add">
+        <i class="bi bi-person-plus-fill"></i> Add Employee
+      </button>
+      <div>
+        <button (click)="filterItems('active')" class="btn btn-primary me-2">
+          <i class="bi bi-check-circle-fill"></i> Show Active Items
+        </button>
+        <button (click)="filterItems('inactive')" class="btn btn-secondary">
+          <i class="bi bi-check-circle-fill"></i> Show Inactive Items
+        </button>
+        <button (click)="getallemploye()" class="btn btn-warning ms-1">
+          <i class="bi bi-check-circle-fill  "></i> Show all Employe
+        </button>
       </div>
-    </div>
-  </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-responsive" style="max-height: calc(100vh - 160px); overflow-y: auto;">
+      <table class="table table-bordered table-striped">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if(allemployee.length > 0) {
+            @for (item of allemployee; track $index) {
+              <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.age }}</td>
+                <td>
+                  <button class="btn btn-info btn-sm me-2" [routerLink]="['/edit', item.id]">
+                <i class="fa-solid fa-pen-to-square"></i>               </button>
+                  <button class="btn btn-danger btn-sm" (click)="delemp(item.id)">
+                    <i class="fa-solid fa-trash"></i>                   </button>
+                </td>
+              </tr>
+            }}
+           @else {
+            <tr>
+              <td colspan="6" class="text-center">No employee details found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
